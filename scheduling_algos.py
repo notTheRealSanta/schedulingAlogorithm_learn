@@ -1,5 +1,6 @@
 import operator
 
+#class for processes
 class processes :
 
 	pid = 0;
@@ -49,6 +50,7 @@ for x in range(len(process_list)):
 
 
 # Non- primtive Shortest time 
+
 print ("\n\n NON-PRIMTIVE SHORTEST JOB :\n"  )
 print ('|'),
 
@@ -59,8 +61,6 @@ for x in range(len(process_list)):
 	for _ in range(process_list[x].burst_time):
 		print "P",process_list[x].pid,"|",
 
-#for x in range(len(process_list)) :
-#	process_list[x].print_this()
 
 #Primtive Shortest time
 print ("\n\n PRIMTIVE SHORTEST JOB :\n"  )
@@ -92,3 +92,4 @@ while len(s_list) != 0:
 
 
 #ROUND ROBIN
+# to be done!
