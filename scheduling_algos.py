@@ -1,95 +1,30 @@
-import operator
 
-#class for processes
-class processes :
+'''
+Arrival Time:       Time at which the process arrives in the ready queue.
+Burst Time:         Time required by a process for CPU execution.
+Completion Time:    Time at which process completes its execution.
+Turn Around Time:   Time Difference between completion time and arrival time.          
+     Turn Around Time = Completion Time - Arrival Time
 
-	pid = 0;
-	arrival_time = 0;
-	burst_time = 0;
-	priority = 0;
+Waiting Time(W.T): Time Difference between turn around time and burst time.
+     Waiting Time = Turn Around Time - Burst Time
+'''
 
-	def __init__ (self, processID, arrival, bursted, pri) :
-		self.pid = processID
-		self.arrival_time = arrival
-		self.burst_time = bursted
-		self.priority = pri
+class Process :
 
-	def print_this (self) :
-		print ( self.pid, self.arrival_time, self.burst_time, self.priority)
+	pid = -1
+	arrival_time = -1
+	burst_time = -1
+	priority = -1
+	completion_time = -1
+	turn_around_time = -1
+	waiting_time = -1
 
-
-
-n_pids =  input ( " Number of process IDs : ")
-print('')
-process_list = []
-
-#Inputs
-for _ in range(n_pids):
-
-	pid = input ( " PID : " )
-	arrival_time = input ( " Arrival Time : " )
-	burst_time = input ( " Burst Time : " )
-	priority = input ( " Priority : " )
-
-	p = processes(pid,arrival_time,burst_time,priority)
-
-	process_list.append(p)
-
-	print('')
-
-	
-# First Come First Server
-print ( "FIRST COME FIRST SERVE :\n" )
-print ('|'),
-
-process_list.sort ( key = operator.attrgetter('arrival_time') )
-
-for x in range(len(process_list)):
-	for _ in range(process_list[x].burst_time):
-		print "P",process_list[x].pid,"|",
+	def __init__(self, pid, arrival_time, burst_time, priority = -1) :
+		self.pid = pid
+		self.arrivel_time = arrival_time
+		self.burst_time = burst_time
+		self.priority = priority
 
 
-# Non- primtive Shortest time 
-
-print ("\n\n NON-PRIMTIVE SHORTEST JOB :\n"  )
-print ('|'),
-
-
-process_list.sort ( key = operator.attrgetter('burst_time'))
-
-for x in range(len(process_list)):
-	for _ in range(process_list[x].burst_time):
-		print "P",process_list[x].pid,"|",
-
-
-#Primtive Shortest time
-print ("\n\n PRIMTIVE SHORTEST JOB :\n"  )
-print ('|'),
-
-process_list.sort (key = operator.attrgetter('arrival_time'))
-max_arrival_time = max(p.arrival_time for p in process_list)
-
-s_list = []
-
-for i in range(max_arrival_time + 1):
-
-	for p in process_list :
-		if p.arrival_time == i :
-			s_list.append(p)
-
-	s_list.sort (key = operator.attrgetter('burst_time'))
-	print "P",s_list[0].pid,"|",
-	s_list[0].burst_time -= 1
-	if s_list[0].burst_time == 0 :
-		s_list.pop(0)
-
-while len(s_list) != 0:
-	s_list.sort (key = operator.attrgetter('burst_time'))
-	print "P",s_list[0].pid,"|",
-	s_list[0].burst_time -= 1
-	if s_list[0].burst_time == 0 :
-		s_list.pop(0)
-
-
-#ROUND ROBIN
-# to be done!
+num_p = input('Number of processes : ')
